@@ -2,6 +2,9 @@
 #ifndef SNDFMT_FILE_SYSTEM_INTERFACE_H_
 #define SNDFMT_FILE_SYSTEM_INTERFACE_H_
 
+#include <string_view>
+
+#include "absl/status/statusor.h"
 #include "sndfmt/file_interface.h"
 
 namespace sndfmt {

@@ -2,22 +2,27 @@
 #ifndef SNDFMT_LOCAL_FILE_H_
 #define SNDFMT_LOCAL_FILE_H_
 
-#include <string_view>
+#include <fcntl.h>
+
+#include <string>
 
 #include "absl/status/statusor.h"
 #include "file_interface.h"
 
 namespace sndfmt {
 
-class LocalFile {
+class LocalFile : public FileInterface {
  public:
   ~LocalFile();
 
-  static absl::StatusOr<FileInterface*> Open(std::string_view path);
+  static absl::StatusOr<FileInterface*> Open(const std::string& path,
+                                             int flags);
+  static absl::StatusOr<FileInterface*> Open(const std::string& path, int flags,
+                                             mode_t mode);
 
-  virtual ssize_t PRead(void* buf, size_t count, off_t offset);
-  virtual ssize_t PWrite(void* buf, size_t count, off_t offset);
-  virtual void Close();
+  ssize_t PRead(void* buf, size_t count, off_t offset) override;
+  ssize_t PWrite(void* buf, size_t count, off_t offset) override;
+  void Close() override;
 
  protected:
   LocalFile(int fd);

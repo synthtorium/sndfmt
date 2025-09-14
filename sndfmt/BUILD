@@ -14,6 +14,7 @@ cc_library(
 				"sndfmt.h",
     ],
     deps = [
+        "@abseil-cpp//absl/log:check",
         "@abseil-cpp//absl/log:log",
         "@abseil-cpp//absl/status:status",
 				"@abseil-cpp//absl/status:statusor",
